@@ -4,7 +4,7 @@ services:
     runtime: node
     region: frankfurt
     plan: free
-    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install && DATABASE_URL="file:./prod.db" npx prisma migrate deploy && DATABASE_URL="file:./prod.db" npx prisma generate
+    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install && DATABASE_URL="file:./prod.db" npx prisma db push --accept-data-loss && DATABASE_URL="file:./prod.db" npx prisma generate
     startCommand: cd backend && node src/index.js
     envVars:
       - key: NODE_ENV
