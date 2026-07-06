@@ -4,8 +4,7 @@ services:
     runtime: node
     region: frankfurt
     plan: free
-    buildCommand: |
-      cd frontend && yarn install && yarn build && cd ../backend && yarn install && npx prisma generate && DATABASE_URL="file:./prod.db" npx prisma db push --skip-generate --accept-data-loss
+    buildCommand: bash build.sh
     startCommand: cd backend && node src/index.js
     envVars:
       - key: NODE_ENV
