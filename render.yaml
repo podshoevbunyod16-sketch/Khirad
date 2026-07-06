@@ -4,8 +4,8 @@ services:
     runtime: node
     region: frankfurt
     plan: free
-    buildCommand: bash build.sh
-    startCommand: cd backend && node src/index.js
+    buildCommand: npm run build:render
+    startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
         value: production

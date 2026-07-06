@@ -7,11 +7,10 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
-    "build": "cd frontend && npm run build",
+    "build": "cd frontend && npm install && npm run build",
+    "build:render": "npm install && cd frontend && npm install && npm run build && cd ../backend && npm install && npx prisma generate && DATABASE_URL=\"file:./prod.db\" npx prisma db push --skip-generate --accept-data-loss",
     "start": "cd backend && npm start",
-    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "db:migrate": "cd backend && npx prisma migrate dev",
-    "db:studio": "cd backend && npx prisma studio"
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
