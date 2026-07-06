@@ -6,7 +6,6 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 
 export default defineConfig({
-  base: '/Khirad/',
   plugins: [
     react(),
     VitePWA({
@@ -19,8 +18,8 @@ export default defineConfig({
         theme_color: '#1a1a2e',
         background_color: '#0f0f23',
         display: 'standalone',
-        scope: '/Khirad/',
-        start_url: '/Khirad/',
+        scope: '/',
+        start_url: '/',
         icons: [
           {
             src: 'pwa-192x192.png',

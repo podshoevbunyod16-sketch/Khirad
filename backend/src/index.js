@@ -27,17 +27,12 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:4173',
   'http://127.0.0.1:5173',
-  process.env.FRONTEND_URL
+  process.env.FRONTEND_URL,
+  process.env.RENDER_EXTERNAL_URL
 ].filter(Boolean);
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(null, true);
-    }
-  },
+  origin: true,
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -61,6 +56,7 @@ app.use('/api/memory', authMiddleware, memoryRoutes);
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   const frontendPath = join(__dirname, '../../frontend/dist');
+  console.log('Serving frontend from:', frontendPath);
   app.use(express.static(frontendPath));
   app.get('*', (req, res) => {
     res.sendFile(join(frontendPath, 'index.html'));
