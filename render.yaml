@@ -4,7 +4,8 @@ services:
     runtime: node
     region: frankfurt
     plan: free
-    buildCommand: cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install --include=dev && DATABASE_URL="file:./prod.db" npx prisma db push --accept-data-loss && DATABASE_URL="file:./prod.db" npx prisma generate
+    buildCommand: |
+      cd frontend && yarn install && yarn build && cd ../backend && yarn install && npx prisma generate && DATABASE_URL="file:./prod.db" npx prisma db push --skip-generate --accept-data-loss
     startCommand: cd backend && node src/index.js
     envVars:
       - key: NODE_ENV
@@ -21,3 +22,5 @@ services:
         sync: false
       - key: SERPER_API_KEY
         sync: false
+      - key: FRONTEND_URL
+        value: https://podshoevbunyod16-sketch.github.io
